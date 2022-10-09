@@ -189,6 +189,7 @@ local config = {
     init = {
       -- You can disable default plugins as follows:
       -- ["goolord/alpha-nvim"] = { disable = true },
+      ["akinsho/toggleterm.nvim"] = { disable = true },
 
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"
@@ -202,15 +203,6 @@ local config = {
       -- },
 
       -- We also support a key value style plugin definition similar to NvChad:
-      -- ["danymat/neogen"] = {
-      --   config = function() require("neogen").setup {} end,
-      --   requires = "nvim-treesitter/nvim-treesitter",
-      --   -- Uncomment next line if you want to follow only stable versions
-      --   -- tag = "*"
-      -- },
-      -- ["fatih/vim-go"] = {
-      --   run = ":GoInstallBinaries",
-      -- },
       ["ray-x/go.nvim"] = {
         requires = {
           "ray-x/guihua.lua", -- recommanded if need floating window support
@@ -257,10 +249,12 @@ local config = {
       -- Check supported formatters and linters
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+      config.debug = true
       config.sources = {
         -- Set a formatter
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.golangci_lint,
       }
       -- set up null-ls's on_attach function
       -- NOTE: You can remove this on attach function to disable format on save
@@ -398,6 +392,13 @@ local config = {
           -- third key is the key to bring up next level and its displayed
           -- group name in which-key top level menu
           ["b"] = { name = "Buffer" },
+          ["t"] = {
+            name = "True-zen",
+            a = { "<cmd> TZAtaraxis <cr>", "Ataraxis Mode" },
+            f = { "<cmd> TZFocus <cr>", "Focus Mode" },
+            m = { "<cmd> TZMinimalist <cr>", "Minimalist Mode" },
+            n = { "<cmd> TZNarrow <cr>", "Narrow Mode" },
+          },
         },
       },
     },
